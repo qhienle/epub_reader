@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EPUB Reader</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #viewer {
+            width: 100%;
+            height: 80vh;
+            border: 1px solid #ccc;
+            overflow: auto;
+        }
+        #controls {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>EPUB Reader</h1>
+    <input type="file" id="epubFile" accept=".epub">
+    <div id="viewer"></div>
+    <div id="controls">
+        <button id="prev">Previous</button>
+        <button id="next">Next</button>
+    </div>    
+    <!-- <script src="epub_reader.js"></script> -->
+    <script>
+let book, rendition;
+document.getElementById('epubFile').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            book = ePub(e.target.result);
+            rendition = book.renderTo('viewer', {
+                width: '100%',
+                height: '100%'
+            });
+            rendition.display();
+        };
+        reader.readAsArrayBuffer(file);
+    }
+});
+document.getElementById("prev").addEventListener("click", function() {
+  if (rendition) rendition.prev();
+});
+document.getElementById("next").addEventListener("click", function() {
+  if (rendition) rendition.next();
+});
+    </script>
+</body>
+</html>

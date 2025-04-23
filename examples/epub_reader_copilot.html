@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EPUB Reader</title>
+    <style>
+        #viewer {
+            width: 100%;
+            height: 100vh;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <input type="file" id="fileInput" accept=".epub">
+    <div id="viewer"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/epub.js/0.3.88/epub.min.js"></script>
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const book = ePub(e.target.result);
+                    const rendition = book.renderTo('viewer', {
+                        width: '100%',
+                        height: '100%'
+                    });
+                    rendition.display();
+                };
+                reader.readAsArrayBuffer(file);
+            }
+        });
+    </script>
+</body>
+</html>

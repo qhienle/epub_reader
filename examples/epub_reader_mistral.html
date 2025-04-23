@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EPUB Reader</title>
+    <script src="https://cdn.jsdelivr.net/npm/epub.js@0.3.94/dist/epub.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #epub-viewer {
+            width: 100%;
+            height: 80vh;
+            border: 1px solid #ccc;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>EPUB Reader</h1>
+    <input type="file" id="epub-file" accept=".epub">
+    <div id="epub-viewer"></div>
+    <script src="epub_reader_mistral.js"></script>
+</body>
+</html>
