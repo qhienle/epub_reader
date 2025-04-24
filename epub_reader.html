@@ -38,10 +38,7 @@ document.getElementById('epubFile').addEventListener('change', function(event) {
         const reader = new FileReader();
         reader.onload = function(e) {
             book = ePub(e.target.result);
-            rendition = book.renderTo('viewer', {
-                width: '100%',
-                height: '100%'
-            });
+            rendition = book.renderTo('viewer', {width: '100%', height: '100%'});
             rendition.display();
         };
         reader.readAsArrayBuffer(file);
